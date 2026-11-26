@@ -1,0 +1,1001 @@
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE FRICTION | Train Without Limits</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --black: #101010;
+  --dark: #181818;
+  --white: #f7f7f4;
+  --lime: #c6ff00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Inter', sans-serif;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.announcement {
+  background: var(--lime);
+  text-align: center;
+  padding: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+header {
+  background: var(--black);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 7%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 35px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.logo span { color: var(--lime); }
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+nav a:hover { color: var(--lime); }
+
+.cart {
+  border: 1px solid #555;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: 700;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.cart span { color: var(--lime); }
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 610px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.92), rgba(0,0,0,.2)),
+    url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=85');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 70px 9%;
+  color: white;
+}
+
+.hero-content { max-width: 650px; }
+
+.hero-label {
+  color: var(--lime);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(65px, 10vw, 115px);
+  line-height: .85;
+  font-weight: 900;
+}
+
+.hero h1 span { color: var(--lime); }
+
+.hero p {
+  color: #ddd;
+  margin: 25px 0;
+  line-height: 1.8;
+  max-width: 440px;
+  font-size: 14px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 16px 27px;
+  background: var(--lime);
+  color: black;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: white;
+  transform: translateY(-2px);
+}
+
+.section { padding: 80px 7%; }
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 35px;
+  gap: 15px;
+}
+
+.section-heading h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 48px;
+  text-transform: uppercase;
+}
+
+.section-heading h2 span { color: #83a900; }
+
+.section-heading p {
+  color: #777;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.category {
+  height: 360px;
+  position: relative;
+  overflow: hidden;
+  background: #222;
+}
+
+.category img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s;
+}
+
+.category:hover img { transform: scale(1.08); }
+
+.category::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,.8));
+}
+
+.category-info {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  color: white;
+  z-index: 2;
+}
+
+.category-info h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 38px;
+}
+
+.category-info p {
+  font-size: 11px;
+  color: var(--lime);
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.shop-section { background: #eeeeea; }
+
+.search {
+  width: 100%;
+  max-width: 350px;
+  padding: 13px 15px;
+  border: 1px solid #ccc;
+  background: white;
+  outline: none;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.filters button {
+  background: transparent;
+  border: 1px solid #aaa;
+  padding: 10px 18px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.filters button.active,
+.filters button:hover {
+  background: var(--black);
+  color: white;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.product {
+  background: white;
+  overflow: hidden;
+}
+
+.product-image {
+  height: 310px;
+  overflow: hidden;
+  background: #ddd;
+  position: relative;
+}
+
+.product-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: .4s;
+}
+
+.product:hover .product-image img {
+  transform: scale(1.06);
+}
+
+.tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--lime);
+  padding: 7px 10px;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.product-info { padding: 17px; }
+
+.product-info small {
+  color: #888;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.product-info h3 {
+  font-size: 14px;
+  margin: 9px 0;
+}
+
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.price { font-weight: 800; }
+
+.product-bottom button {
+  background: var(--black);
+  color: white;
+  border: none;
+  padding: 10px 13px;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.empty {
+  grid-column: 1/-1;
+  padding: 30px;
+  text-align: center;
+  color: #777;
+}
+
+.motto {
+  background: var(--lime);
+  padding: 65px 15px;
+  text-align: center;
+}
+
+.motto h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(45px, 8vw, 80px);
+  font-weight: 900;
+}
+
+.motto p {
+  margin-top: 15px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.creator {
+  background: var(--black);
+  color: white;
+  padding: 75px 7%;
+  text-align: center;
+}
+
+.creator h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.creator h2 span { color: var(--lime); }
+
+.creator p {
+  color: #aaa;
+  line-height: 1.8;
+  margin: 0 auto 25px;
+  max-width: 500px;
+  font-size: 13px;
+}
+
+footer {
+  background: #080808;
+  color: white;
+  padding: 40px 7%;
+  text-align: center;
+}
+
+footer p {
+  font-size: 11px;
+  color: #777;
+  margin-top: 10px;
+}
+
+/* Product details and cart */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(7, 7, 7, 0.78);
+  padding: 80px;
+  overflow-y: auto;
+  align-items: large;
+  justify-content: large;
+}
+
+.modal.open { display: flex; }
+
+.modal-panel {
+  position: relative;
+  background: #f7f7f4;
+  width: min(900px,100%);
+  max-height: 150vh;
+  overflow: auto;
+  padding: 80px;
+}
+
+.modal-close {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  border: 0;
+  background: transparent;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.modal-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.modal-content img {
+  width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+  background: #eee;
+}
+
+.modal-content h2,
+.cart-panel h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 38px;
+  margin-bottom: 12px;
+}
+
+.modal-content p {
+  color: #555;
+  line-height: 1.7;
+  margin: 15px 0;
+}
+
+.modal-price {
+  font-size: 24px;
+  font-weight: 900;
+  margin: 15px 0;
+}
+
+.size-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  margin: 15px 0 8px;
+}
+
+.size-select {
+  padding: 12px;
+  border: 1px solid #aaa;
+  background: white;
+  min-width: 120px;
+}
+
+.modal-add {
+  margin-top: 18px;
+  width: 100%;
+}
+
+.cart-panel { width: min(600px,100%); }
+
+.cart-line {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 14px 0;
+}
+
+.cart-line img {
+  width: 75px;
+  height: 85px;
+  object-fit: cover;
+}
+
+.cart-line-info { flex: 1; }
+
+.cart-line-info small {
+  display: block;
+  color: #666;
+  margin-top: 4px;
+}
+
+.cart-remove {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #a00;
+  font-weight: 800;
+}
+
+.cart-total {
+  font-size: 20px;
+  font-weight: 900;
+  text-align: right;
+  margin: 20px 0;
+}
+
+.checkout-btn {
+  width: 100%;
+  text-align: center;
+}
+
+.cart-note {
+  font-size: 11px;
+  color: #777;
+  margin-top: 12px;
+}
+
+@media(max-width:900px) {
+  .products { grid-template-columns: repeat(2,1fr); }
+  .category { height: 280px; }
+}
+
+@media(max-width:600px) {
+  header { padding: 15px 5%; }
+  .logo { font-size: 28px; }
+  .menu-btn { display: block; }
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    background: #101010;
+    flex-direction: column;
+    padding: 25px;
+  }
+
+  nav.open { display: flex; }
+  .cart { padding: 8px; }
+  .hero { min-height: 520px; padding: 50px 7%; }
+  .section { padding: 55px 5%; }
+  .section-heading h2 { font-size: 37px; }
+  .categories { grid-template-columns: 1fr; }
+  .category { height: 320px; }
+  .product-image { height: 230px; }
+  .product-info { padding: 12px; }
+  .modal-panel { padding: 20px; }
+  .modal-content { grid-template-columns: 1fr; }
+  .modal-content img { max-height: 42vh; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="announcement">
+  TRAIN HARDER. MOVE STRONGER. LIVE BETTER.
+</div>
+
+<header>
+  <a href="#home" class="logo">THE <span>FRICTION</span></a>
+
+  <nav id="nav">
+    <a href="#home">HOME</a>
+    <a href="#categories">CATEGORIES</a>
+    <a href="#shop">SHOP</a>
+    <a href="#about">ABOUT</a>
+  </nav>
+
+  <button class="cart" onclick="openCart()">
+    BAG <span id="cartCount">0</span>
+  </button>
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-label">BUILT FOR THE GRIND</div>
+    <h1>NO EXCUSES.<br><span>JUST WORK.</span></h1>
+    <p>
+      Your body. Your limits. Your journey.
+      Discover gym wear designed for movement,
+      confidence and performance.
+    </p>
+    <a href="#shop" class="btn">EXPLORE COLLECTION →</a>
+  </div>
+</section>
+
+<section class="section" id="categories">
+  <div class="section-heading">
+    <div>
+      <p>FIND YOUR FIT</p>
+      <h2>SHOP BY <span>CATEGORY</span></h2>
+    </div>
+  </div>
+
+  <div class="categories">
+    <a href="#shop" class="category" onclick="selectCategory('men')">
+      <img src="images/blue-sleeveless.jpg" alt="Men's gym wear">
+      <div class="category-info">
+        <h3>MEN'S WEAR</h3>
+        <p>TRAIN WITHOUT LIMITS →</p>
+      </div>
+    </a>
+
+    <a href="#shop" class="category" onclick="selectCategory('men')">
+      <img src="images/black-graphic-hoodie.jpg" alt="Graphic hoodie">
+      <div class="category-info">
+        <h3>HOODIES</h3>
+        <p>OWN YOUR STYLE →</p>
+      </div>
+    </a>
+
+    <a href="#shop" class="category" onclick="selectCategory('men')">
+      <img src="images/black-zip-vest.jpg" alt="Sleeveless vest">
+      <div class="category-info">
+        <h3>STREETWEAR</h3>
+        <p>EVERY REP COUNTS →</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section shop-section" id="shop">
+  <div class="section-heading">
+    <div>
+      <p>GEAR UP FOR GREATNESS</p>
+      <h2>THE <span>COLLECTION</span></h2>
+    </div>
+  </div>
+
+  <input
+    type="text"
+    id="search"
+    class="search"
+    placeholder="Search products..."
+    oninput="renderProducts()"
+  >
+
+  <div class="filters">
+    <button class="active" onclick="selectCategory('all')">ALL</button>
+    <button onclick="selectCategory('men')">MEN</button>
+  </div>
+
+  <div class="products" id="productList"></div>
+</section>
+
+<!-- PRODUCT DETAILS -->
+<div class="modal" id="productModal">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeProduct()">&times;</button>
+    <div class="modal-content" id="productDetails"></div>
+  </div>
+</div>
+
+<!-- SHOPPING BAG -->
+<div class="modal" id="cartModal">
+  <div class="modal-panel cart-panel">
+    <button class="modal-close" onclick="closeCart()">&times;</button>
+    <h2>YOUR BAG</h2>
+    <div id="cartItems"></div>
+    <div class="cart-total" id="cartTotal"></div>
+    <button class="btn checkout-btn" onclick="checkout()">
+      ORDER VIA WHATSAPP
+    </button>
+    <p class="cart-note">
+      Add your WhatsApp number in the JavaScript before accepting orders.
+    </p>
+  </div>
+</div>
+
+<section class="motto">
+  <h2>EMBRACE THE<br>FRICTION.</h2>
+  <p>PROGRESS IS NEVER COMFORTABLE.</p>
+</section>
+
+<section class="creator" id="about">
+  <p>FITNESS. DISCIPLINE. CONSISTENCY.</p>
+  <h2>BUILT AROUND <span>FITNESS.</span></h2>
+  <p>
+    THE FRICTION is a gym-wear brand for people
+    who believe in showing up, putting in the work
+    and becoming stronger every day.
+  </p>
+</section>
+
+<footer>
+  <div class="logo">THE <span>FRICTION</span></div>
+  <p>GYM WEAR • FITNESS • PERFORMANCE</p>
+  <p>© 2026 THE FRICTION. ALL RIGHTS RESERVED.</p>
+</footer>
+
+<script>  
+
+// YOUR PRODUCTS
+const products = [
+  {
+    id: "blue-sleeveless",
+    name: "Blue Graphic Sleeveless Tee",
+    category: "men",
+    type: "MEN'S COLLECTION",
+    price: 799,
+    image: "images/blue-sleeveless.jpg",
+    description: "Royal blue sleeveless tee with ornate white graphic detailing.",
+    sizes: ["S", "M", "L", "XL"]
+  },
+  {
+    id: "black-hoodie",
+    name: "Black Graphic Hoodie",
+    category: "men",
+    type: "MEN'S COLLECTION",
+    price: 1499,
+    image: "images/black-graphic-hoodie.jpg",
+    description: "Black graphic hoodie with a bold chest print and relaxed styling.",
+    sizes: ["S", "M", "L", "XL"]
+  },
+  {
+    id: "zip-vest",
+    name: "Black Sleeveless Zip Vest",
+    category: "men",
+    type: "MEN'S COLLECTION",
+    price: 1199,
+    image: "images/black-zip-vest.jpg",
+    description: "Black sleeveless zip vest for layering and gym wear.",
+    sizes: ["S", "M", "L", "XL"]
+  },
+  {
+    id: "graphic-pants",
+    name: "Graphic Training Pants",
+    category: "men",
+    type: "MEN'S COLLECTION",
+    price: 999,
+    image: "images/vee.jpg",
+    description: "Black relaxed-fit training pants with graphic detailing.",
+    sizes: ["S", "M", "L", "XL"]
+  }
+];
+
+let activeCategory = "all";
+let cart = [];
+
+function renderProducts() {
+  const list = document.getElementById("productList");
+  const search = document.getElementById("search").value.toLowerCase();
+
+  const filtered = products.filter(product => {
+    const categoryMatch =
+      activeCategory === "all" ||
+      product.category === activeCategory;
+
+    const searchMatch =
+      product.name.toLowerCase().includes(search);
+
+    return categoryMatch && searchMatch;
+  });
+
+  if (!filtered.length) {
+    list.innerHTML =
+      '<div class="empty">No products found.</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(product => `
+    <article class="product">
+      <div class="product-image">
+        <img src="${product.image}" alt="${product.name}" loading="lazy">
+        <span class="tag">NEW DROP</span>
+      </div>
+
+      <div class="product-info">
+        <small>${product.type}</small>
+        <h3>${product.name}</h3>
+
+        <div class="product-bottom">
+          <span class="price">
+            ₹${product.price.toLocaleString("en-IN")}
+          </span>
+
+          <button onclick="openProduct('${product.id}')">
+            VIEW DETAILS →
+          </button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function selectCategory(category) {
+  activeCategory = category;
+
+  document.querySelectorAll(".filters button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.textContent.toLowerCase() === category
+    );
+  });
+
+  renderProducts();
+}
+
+function openProduct(id) {
+  const product = products.find(item => item.id === id);
+
+  if (!product) return;
+
+  document.getElementById("productDetails").innerHTML = `
+    <img src="${product.image}" alt="${product.name}">
+
+    <div>
+      <Large>${product.type}</large>
+      <h2>${product.name}</h2>
+      <p>${product.description}</p>
+
+      <div class="modal-price">
+        ₹${product.price.toLocaleString("en-IN")}
+      </div>
+
+      <label class="size-label" for="productSize">
+        SELECT SIZE
+      </label>
+
+      <select class="size-select" id="productSize">
+        <option value="">Choose size</option>
+        ${product.sizes.map(size =>
+          `<option value="${size}">${size}</option>`
+        ).join("")}
+      </select>
+
+      <button class="btn modal-add"
+        onclick="addToCart('${product.id}')">
+        ADD TO BAG
+      </button>
+    </div>
+  `;
+
+  document.getElementById("productModal").classList.add("open");
+}
+
+function closeProduct() {
+  document.getElementById("productModal").classList.remove("open");
+}
+
+function addToCart(id) {
+  const product = products.find(item => item.id === id);
+  const size = document.getElementById("productSize").value;
+
+  if (!size) {
+    alert("Please select a size.");
+    return;
+  }
+
+  const existing = cart.find(
+    item => item.id === id && item.size === size
+  );
+
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.push({
+      ...product,
+      size: size,
+      quantity: 1
+    });
+  }
+
+  updateCart();
+  closeProduct();
+  alert("Product added to your bag!");
+}
+
+function updateCart() {
+  const count = cart.reduce(
+    (total, item) => total + item.quantity, 0
+  );
+
+  document.getElementById("cartCount").textContent = count;
+}
+
+function openCart() {
+  renderCart();
+  document.getElementById("cartModal").classList.add("open");
+}
+
+function closeCart() {
+  document.getElementById("cartModal").classList.remove("open");
+}
+
+function renderCart() {
+  const container = document.getElementById("cartItems");
+
+  if (!cart.length) {
+    container.innerHTML = "<p>Your bag is empty.</p>";
+    document.getElementById("cartTotal").textContent = "Total: ₹0";
+    return;
+  }
+
+  container.innerHTML = cart.map((item, index) => `
+    <div class="cart-line">
+      <img src="${item.image}" alt="${item.name}">
+
+      <div class="cart-line-info">
+        <strong>${item.name}</strong>
+        <small>Size: ${item.size}</small>
+        <small>Quantity: ${item.quantity}</small>
+        <small>₹${(item.price * item.quantity).toLocaleString("en-IN")}</small>
+      </div>
+
+      <button class="cart-remove"
+        onclick="removeFromCart(${index})">
+        REMOVE
+      </button>
+    </div>
+  `).join("");
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity, 0
+  );
+
+  document.getElementById("cartTotal").textContent =
+    "Total: ₹" + total.toLocaleString("en-IN");
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCart();
+  renderCart();
+}
+
+function checkout() {
+  if (!cart.length) {
+    alert("Your bag is empty!");
+    return;
+  }
+
+  // REPLACE WITH YOUR WHATSAPP NUMBER
+  const whatsappNumber = "91XXXXXXXXXX";
+
+  if (whatsappNumber.includes("X")) {
+    alert("Please add your WhatsApp number in the code first.");
+    return;
+  }
+
+  let message = "Hello THE FRICTION! I want to order:\n\n";
+
+  cart.forEach(item => {
+    message +=
+      `${item.name}\nSize: ${item.size}\nQuantity: ${item.quantity}\nPrice: ₹${item.price * item.quantity}\n\n`;
+  });
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity, 0
+  );
+
+  message += `Total: ₹${total}`;
+
+  const url =
+    "https://wa.me/" + whatsappNumber +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank");
+}
+
+function toggleMenu() {
+  document.getElementById("nav").classList.toggle("open");
+}
+
+document.getElementById("nav")
+  .querySelectorAll("a")
+  .forEach(link => {
+    link.addEventListener("click", () => {
+      document.getElementById("nav").classList.remove("open");
+    });
+  });
+
+renderProducts();
+
+</script>
+
+</body>
+</html>
+```
